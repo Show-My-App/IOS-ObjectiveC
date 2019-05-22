@@ -9,16 +9,16 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#import "ShowMyAppRequest.h"
+#import "ShowMyAppRequestURL.h"
+#import "ShowMyAppRequestQRCode.h"
 
-typedef void(^ShowMyAppBlockQRCode)(UIImage *sQRCode);
-typedef void(^ShowMyAppBlockURL)(NSURL *sURL);
-
-@interface ShowMyApp : NSObject <ShowMyAppRequestDelegate>{
+@interface ShowMyApp : NSObject {
     NSString *AppName; // &n=xxxxx
-    NSString *Design; // &d=xxxxx
-    NSString *DesignColor; // &c=#XXXXXX
-    NSString *DesignColorBackground; // &k=#XXXXXX
+    NSInteger Design; // &d=xxxxx
+    UIColor *DesignColor; // &c=#XXXXXX
+    UIColor *DesignColorBackground; // &k=#XXXXXX
+    bool tiny; // &t=0/1
+    bool oneIconOnly; // &i=0/1
     
     NSString *iOS_iPhone_BundleID; // &a=xxxxx
     NSString *iOS_iPad_BundleID; // &b=xxxxx
@@ -33,23 +33,27 @@ typedef void(^ShowMyAppBlockURL)(NSURL *sURL);
     
     NSString *steam_BundleID;  // &s=xxxxx
     
-    ShowMyAppRequest *downloadTinyURL;
-    ShowMyAppRequest *downloadTinyQRCode;
-    ShowMyAppRequest *downloadQRCode;
+//    ShowMyAppRequest *downloadTinyURL;
+//    ShowMyAppRequest *downloadTinyQRCode;
+//    ShowMyAppRequest *downloadQRCode;
+//
+//    NSString *tinyURL;
+//    UIImage *QRCode;
+//    UIImage *tinyQRCode;
+//
+//    ShowMyAppBlockURL tinyURLBlock;
+//    ShowMyAppBlockQRCode tinyQRCodeBlock;
+//    ShowMyAppBlockQRCode QRCodeBlock;
     
-    NSString *tinyURL;
-    UIImage *QRCode;
-    UIImage *tinyQRCode;
-    
-    ShowMyAppBlockURL tinyURLBlock;
-    ShowMyAppBlockQRCode tinyQRCodeBlock;
-    ShowMyAppBlockQRCode QRCodeBlock;
-    
-    bool tiny; // &t=0/1
 }
 
 @property (nonatomic, strong) NSString *AppName;
-@property (nonatomic, strong) NSString *Design;
+@property (nonatomic) NSInteger Design;
+@property (nonatomic, strong) UIColor *DesignColor;
+@property (nonatomic, strong) UIColor *DesignColorBackground;
+@property (nonatomic) bool tiny;
+@property (nonatomic) bool oneIconOnly;
+
 @property (nonatomic, strong) NSString *iOS_iPhone_BundleID;
 @property (nonatomic, strong) NSString *iOS_iPad_BundleID;
 @property (nonatomic, strong) NSString *macOS_BundleID;
@@ -62,20 +66,30 @@ typedef void(^ShowMyAppBlockURL)(NSURL *sURL);
 @property (nonatomic, strong) NSString *windows_Phone_BundleID;
 
 @property (nonatomic, strong) NSString *steam_BundleID;
-@property (nonatomic) bool tiny;
 
--(NSURL*)CreateURL;
--(bool)IsTiny;
+-(void)GetURL:(ShowMyAppBlockURL) sBlock;
+-(void)GetFullURL:(ShowMyAppBlockURL) sBlock;
 -(void)GetTinyURL:(ShowMyAppBlockURL) sBlock;
+
 -(void)GetQRCode:(ShowMyAppBlockQRCode) sBlock;
+-(void)GetFullQRCode:(ShowMyAppBlockQRCode) sBlock;
 -(void)GetTinyQRCode:(ShowMyAppBlockQRCode) sBlock;
+
 -(void)InsertURL:(UILabel *)sLabel;
+-(void)InsertFullURL:(UILabel *)sLabel;
 -(void)InsertTinyURL:(UILabel *)sLabel;
+
 -(void)InsertQRCode:(UIImageView *)sImageView;
+-(void)InsertFullQRCode:(UIImageView *)sImageView;
 -(void)InsertTinyQRCode:(UIImageView *)sImageView;
+
 -(void)Share:(UIViewController *)sParentController Message:(NSString*) sMessage;
+-(void)ShareFull:(UIViewController *)sParentController Message:(NSString*) sMessage;
 -(void)ShareTiny:(UIViewController *)sParentController Message:(NSString*) sMessage;
--(void)ShareQRCode:(UIViewController *)sParentController;
+
+-(void)ShareFullQRCode:(UIViewController *)sParentController;
 -(void)ShareTinyQRCode:(UIViewController *)sParentController;
+
 -(void)ShareInWebBrowser;
+-(void)Powered;
 @end

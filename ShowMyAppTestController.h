@@ -20,9 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
     IBOutlet UIImageView *imageTinyQRCode;
 }
 -(void)Install:(ShowMyApp*) sShowMyAppInstance;
--(IBAction)Share:(id)sSender;
+-(IBAction)ShareFull:(id)sSender;
 -(IBAction)ShareTiny:(id)sSender;
--(IBAction)ShareQRCode:(id)sSender;
+-(IBAction)ShareFullQRCode:(id)sSender;
 -(IBAction)ShareTinyQRCode:(id)sSender;
 -(IBAction)ShareClose:(id)sSender;
 -(IBAction)ShareInWebBrowser;

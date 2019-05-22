@@ -16,9 +16,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [ShowMyAppInstance InsertURL:textURL];
+    [ShowMyAppInstance InsertFullURL:textURL];
     [ShowMyAppInstance InsertTinyURL:textTinyURL];
-    [ShowMyAppInstance InsertQRCode:imageQRCode];
+    [ShowMyAppInstance InsertFullQRCode:imageQRCode];
     [ShowMyAppInstance InsertTinyQRCode:imageTinyQRCode];
 }
 
@@ -26,7 +26,8 @@
     ShowMyAppInstance = sShowMyAppInstance;
 }
 
--(IBAction)Share:(id)sSender {
+-(IBAction)ShareFull:(id)sSender {
+    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     if (ShowMyAppInstance!=NULL)
     {
         [ShowMyAppInstance Share:self Message:@"Try this App!"];
@@ -34,33 +35,35 @@
 }
 
 -(IBAction)ShareTiny:(id)sender {
+    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     if (ShowMyAppInstance!=NULL)
     {
         [ShowMyAppInstance ShareTiny:self Message:@"Try this App!"];
     }
 }
 
--(IBAction)ShareQRCode:(id)sSender {
+-(IBAction)ShareFullQRCode:(id)sSender {
+    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     if (ShowMyAppInstance!=NULL)
     {
-        [ShowMyAppInstance ShareQRCode:self];
+        [ShowMyAppInstance ShareFullQRCode:self];
     }
 }
 
 -(IBAction)ShareTinyQRCode:(id)sSender {
+    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     if (ShowMyAppInstance!=NULL)
     {
         [ShowMyAppInstance ShareTinyQRCode:self];
     }
 }
 
--(IBAction)ShareClose:(id)sSender {
-    [self dismissViewControllerAnimated:NO completion:nil];
-}
 -(IBAction)ShareInWebBrowser {
+    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     if (ShowMyAppInstance!=NULL)
     {
         [ShowMyAppInstance ShareInWebBrowser];
     }
 }
+
 @end

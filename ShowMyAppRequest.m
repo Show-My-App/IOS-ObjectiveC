@@ -12,11 +12,13 @@
 
 +(ShowMyAppRequest*)createDownloadForURL:(NSURL*)sUrl withDelegate:(id<ShowMyAppRequestDelegate>)sDelegate
 {
+    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
 	ShowMyAppRequest *tObject = [[ShowMyAppRequest alloc] initDownloadForURL:(NSURL*)sUrl withDelegate:(id<ShowMyAppRequestDelegate>)sDelegate];
 	return tObject;
 }
 
 -(id)initDownloadForURL:(NSURL*)sUrl withDelegate:(id<ShowMyAppRequestDelegate>)sDelegate {
+    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
 	self = [super init];
 	if (self !=nil)
 		{
@@ -31,6 +33,7 @@
 }
 
 -(void)dealloc {
+    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
 	if (reception != nil){reception=nil;};
 	if (receivedData != nil){receivedData=nil;};
 	url = nil;
@@ -38,9 +41,11 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
+    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
 }
 
 - (void)connection:(NSURLConnection *)connection didCancelAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge{
+    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
 	if (delegate != NULL && [delegate respondsToSelector:@selector(DownloadObjectDelegateError:)])
 		{
         [delegate DownloadObjectDelegateError:self];
@@ -51,6 +56,7 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
 	if (delegate != NULL && [delegate respondsToSelector:@selector(DownloadObjectDelegateError:)])
 		{
         [delegate DownloadObjectDelegateError:self];
@@ -60,14 +66,16 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
-	float t_pourcentageUpload = (float)totalBytesWritten/(float)totalBytesExpectedToWrite;
-	if (delegate != NULL && [delegate respondsToSelector:@selector(DownloadObjectDelegatePourcentage:pourcentage:)])
+    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+	float tPercentageUpload = (float)totalBytesWritten/(float)totalBytesExpectedToWrite;
+	if (delegate != NULL && [delegate respondsToSelector:@selector(DownloadObjectDelegatePercentage:percentage:)])
 		{
-		[delegate DownloadObjectDelegatePourcentage:self pourcentage:t_pourcentageUpload];
+		[delegate DownloadObjectDelegatePercentage:self percentage:tPercentageUpload];
 		};
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
 	if ([response respondsToSelector:@selector(statusCode)])
 		{
 		int t_statusCode = (int)[((NSHTTPURLResponse *)response) statusCode];
@@ -89,9 +97,9 @@
 			finalWeight = [response expectedContentLength]; // mon Content-Length:
 			if (finalWeight != NSURLResponseUnknownLength)
 				{
-				if (delegate != NULL && [delegate respondsToSelector:@selector(DownloadObjectDelegatePourcentage:pourcentage:)])
+				if (delegate != NULL && [delegate respondsToSelector:@selector(DownloadObjectDelegatePercentage:percentage:)])
 					{
-					[delegate DownloadObjectDelegatePourcentage:self pourcentage:[self percentage]];
+					[delegate DownloadObjectDelegatePercentage:self percentage:[self percentage]];
 					};
 				};
 			};
@@ -99,6 +107,7 @@
 }
 
 -(float)percentage {
+    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
 	if ((float)finalWeight > 0.0f)
 	{
 		return (float)actualWeight/(float)finalWeight;
@@ -110,21 +119,23 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
 	if (receivedData!=nil)
 		{
 		[receivedData appendData:data];
 		actualWeight = actualWeight + [data length];
 		if (finalWeight != NSURLResponseUnknownLength)
 			{
-			if (delegate != NULL && [delegate respondsToSelector:@selector(DownloadObjectDelegatePourcentage:pourcentage:)])
+			if (delegate != NULL && [delegate respondsToSelector:@selector(DownloadObjectDelegatePercentage:percentage:)])
 				{
-				[delegate DownloadObjectDelegatePourcentage:self pourcentage:[self percentage]];
+				[delegate DownloadObjectDelegatePercentage:self percentage:[self percentage]];
 				};
 			};
 		};
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
 	if (delegate != NULL && [delegate respondsToSelector:@selector(DownloadObjectDelegateFinish:data:)])
 		{
 		[delegate DownloadObjectDelegateFinish:self data:[NSData dataWithData:receivedData]];

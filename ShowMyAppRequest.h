@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 
 @protocol ShowMyAppRequestDelegate;
 
@@ -26,7 +28,7 @@
 @protocol ShowMyAppRequestDelegate <NSObject>
 @optional
 -(void)DownloadObjectDelegateStart:(ShowMyAppRequest*)sObject;
--(void)DownloadObjectDelegatePourcentage:(ShowMyAppRequest*)sObject pourcentage:(float)sFloat;
+-(void)DownloadObjectDelegatePercentage:(ShowMyAppRequest*)sObject percentage:(float)sFloat;
 -(void)DownloadObjectDelegateFinish:(ShowMyAppRequest*)sObject data:(NSData*)sData;
 -(void)DownloadObjectDelegateError:(ShowMyAppRequest*)sObject;
 @end

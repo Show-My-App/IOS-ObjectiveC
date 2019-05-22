@@ -16,36 +16,36 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if ([ShowMyAppInstance IsTiny] == false)
+    if (ShowMyAppInstance!=NULL)
     {
         [ShowMyAppInstance InsertQRCode:imageQRCode];
-    }
-    else
-    {
-        [ShowMyAppInstance InsertTinyQRCode:imageQRCode];
     }
 }
 
 - (void)Install:(ShowMyApp*) sShowMyAppInstance {
+    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     ShowMyAppInstance = sShowMyAppInstance;
 }
 
 -(IBAction)Share:(id)sSender {
+    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     if (ShowMyAppInstance!=NULL)
     {
-        if ([ShowMyAppInstance IsTiny] == false)
-        {
-            [ShowMyAppInstance Share:self Message:@"Try this App!"];
-        }
-        else
-        {
-            [ShowMyAppInstance ShareTiny:self Message:@"Try this App!"];
-        }
+        [ShowMyAppInstance Share:self Message:@"Try this App!"];
     }
 }
 
 -(IBAction)ShareClose:(id)sSender {
+    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(IBAction)Powered:(id)sSender {
+    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    if (ShowMyAppInstance!=NULL)
+    {
+        [ShowMyAppInstance Powered];
+    }
 }
 
 @end
