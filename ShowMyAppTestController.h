@@ -24,7 +24,6 @@ NS_ASSUME_NONNULL_BEGIN
 -(IBAction)ShareTiny:(id)sSender;
 -(IBAction)ShareFullQRCode:(id)sSender;
 -(IBAction)ShareTinyQRCode:(id)sSender;
--(IBAction)ShareClose:(id)sSender;
 -(IBAction)ShareInWebBrowser;
 @end
 

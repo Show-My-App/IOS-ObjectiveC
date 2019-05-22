@@ -27,7 +27,7 @@
 }
 
 -(IBAction)ShareFull:(id)sSender {
-    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     if (ShowMyAppInstance!=NULL)
     {
         [ShowMyAppInstance Share:self Message:@"Try this App!"];
@@ -35,7 +35,7 @@
 }
 
 -(IBAction)ShareTiny:(id)sender {
-    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     if (ShowMyAppInstance!=NULL)
     {
         [ShowMyAppInstance ShareTiny:self Message:@"Try this App!"];
@@ -43,7 +43,7 @@
 }
 
 -(IBAction)ShareFullQRCode:(id)sSender {
-    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     if (ShowMyAppInstance!=NULL)
     {
         [ShowMyAppInstance ShareFullQRCode:self];
@@ -51,7 +51,7 @@
 }
 
 -(IBAction)ShareTinyQRCode:(id)sSender {
-    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     if (ShowMyAppInstance!=NULL)
     {
         [ShowMyAppInstance ShareTinyQRCode:self];
@@ -59,7 +59,7 @@
 }
 
 -(IBAction)ShareInWebBrowser {
-    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     if (ShowMyAppInstance!=NULL)
     {
         [ShowMyAppInstance ShareInWebBrowser];

@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
     ShowMyApp *ShowMyAppInstance;
     IBOutlet UIImageView *imageQRCode;
 }
-
++(ShowMyAppViewController*)CreateViewController:(ShowMyApp*) sShowMyApp;
 -(void)Install:(ShowMyApp*) sShowMyAppInstance;
 -(IBAction)Share:(id)sSender;
 -(IBAction)ShareClose:(id)sSender;

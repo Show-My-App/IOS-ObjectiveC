@@ -44,7 +44,7 @@ NSString *const website = @"https://www.show-my-app.com/";
 }
 
 -(NSString*) GetParam {
-    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     NSMutableArray *tURL = [[NSMutableArray alloc] init];
     if ([AppName length]!=0)
     {
@@ -109,12 +109,12 @@ NSString *const website = @"https://www.show-my-app.com/";
 }
 
 -(NSURL*)CreateURL {
-    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     return [[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@%@%@", website, @"r.php?", [self GetParam]]];
 }
 
 -(void)GetURL:(ShowMyAppBlockURL) sBlock {
-    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     if (tiny == true)
     {
         [self GetTinyURL:sBlock];
@@ -125,18 +125,18 @@ NSString *const website = @"https://www.show-my-app.com/";
     }
 }
 -(void)GetFullURL:(ShowMyAppBlockURL) sBlock {
-    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     sBlock([self CreateURL]);
 }
 
 -(void)GetTinyURL:(ShowMyAppBlockURL) sBlock {
-    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     NSURL *tURL = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@%@%@", website, @"url.php?t=1&", [self GetParam]]];
     [ShowMyAppRequestURL createDownloadForURL:tURL withBlock:sBlock];
     }
 
 -(void)GetQRCode:(ShowMyAppBlockQRCode) sBlock {
-    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     if (tiny == true)
     {
         [self GetTinyQRCode:sBlock];
@@ -148,19 +148,19 @@ NSString *const website = @"https://www.show-my-app.com/";
 }
 
 -(void)GetFullQRCode:(ShowMyAppBlockQRCode) sBlock {
-    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     NSURL *tURL = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@%@%@", website, @"qrcode.php?", [self GetParam]]];
     [ShowMyAppRequestQRCode createDownloadForURL:tURL withBlock:sBlock];
 }
 
 -(void)GetTinyQRCode:(ShowMyAppBlockQRCode) sBlock {
-    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     NSURL *tURL = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@%@%@", website, @"qrcode.php?t=1&", [self GetParam]]];
     [ShowMyAppRequestQRCode createDownloadForURL:tURL withBlock:sBlock];
 }
 
 -(void)InsertURL:(UILabel *)sLabel {
-    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     if (tiny == true)
     {
         [self InsertTinyURL:sLabel];
@@ -172,12 +172,12 @@ NSString *const website = @"https://www.show-my-app.com/";
 }
 
 -(void)InsertFullURL:(UILabel *)sLabel {
-    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     [sLabel setText:[[self CreateURL] absoluteString]];
 }
 
 -(void)InsertTinyURL:(UILabel *)sLabel {
-    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     [self GetTinyURL: ^(NSURL *sURL){
         [sLabel setText:[sURL absoluteString]];
     }];
@@ -185,7 +185,7 @@ NSString *const website = @"https://www.show-my-app.com/";
 
 
 -(void)InsertQRCode:(UIImageView *)sImageView {
-    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     if (tiny == true)
     {
         [self InsertTinyQRCode:sImageView];
@@ -197,21 +197,21 @@ NSString *const website = @"https://www.show-my-app.com/";
 }
 
 -(void)InsertFullQRCode:(UIImageView *)sImageView {
-    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     [self GetFullQRCode: ^(UIImage *sQRCode){
         [sImageView setImage:sQRCode];
     }];
 }
 
 -(void)InsertTinyQRCode:(UIImageView *)sImageView {
-    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     [self GetTinyQRCode: ^(UIImage *sQRCode){
         [sImageView setImage:sQRCode];
     }];
 }
 
 -(void)Share:(UIViewController *)sParentController Message:(NSString*) sMessage {
-    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     if (tiny == true)
     {
         [self ShareTiny:sParentController Message: sMessage];
@@ -223,14 +223,14 @@ NSString *const website = @"https://www.show-my-app.com/";
 }
 
 -(void)ShareFull:(UIViewController *)sParentController Message:(NSString*) sMessage {
-    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     NSArray *tShared = [[NSArray alloc] initWithObjects:[NSString stringWithFormat:@"%@\n%@",sMessage,[[self CreateURL] absoluteString]], nil];
     UIActivityViewController *tShareController = [[UIActivityViewController alloc] initWithActivityItems:tShared applicationActivities:NULL];
     [sParentController presentViewController:tShareController animated:true completion:nil];
 }
 
 -(void)ShareTiny:(UIViewController *)sParentController Message:(NSString*) sMessage {
-    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     [self GetTinyURL: ^(NSURL *sURL){
         NSArray *tShared = [[NSArray alloc] initWithObjects:[NSString stringWithFormat:@"%@\n%@",sMessage,[sURL absoluteString]], nil];
         UIActivityViewController *tShareController = [[UIActivityViewController alloc] initWithActivityItems:tShared applicationActivities:NULL];
@@ -239,7 +239,7 @@ NSString *const website = @"https://www.show-my-app.com/";
 }
 
 -(void)ShareFullQRCode:(UIViewController *)sParentController {
-    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     [self GetFullQRCode:^(UIImage *sQRCode){
         NSArray *tShared = [[NSArray alloc] initWithObjects:sQRCode, nil];
         UIActivityViewController *tShareController = [[UIActivityViewController alloc] initWithActivityItems:tShared applicationActivities:NULL];
@@ -248,7 +248,7 @@ NSString *const website = @"https://www.show-my-app.com/";
 }
 
 -(void)ShareTinyQRCode:(UIViewController *)sParentController {
-        NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+        //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     [self GetTinyQRCode: ^(UIImage *sQRCode){
         NSArray *tShared = [[NSArray alloc] initWithObjects:sQRCode, nil];
         UIActivityViewController *tShareController = [[UIActivityViewController alloc] initWithActivityItems:tShared applicationActivities:NULL];
@@ -257,12 +257,12 @@ NSString *const website = @"https://www.show-my-app.com/";
     }
 
 -(void)ShareInWebBrowser {
-    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     [[UIApplication sharedApplication] openURL:[self CreateURL]];
 }
 
 -(void)Powered {
-    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     [[UIApplication sharedApplication] openURL:[[NSURL alloc] initWithString:website]];
 }
  @end

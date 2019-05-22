@@ -14,6 +14,14 @@
 
 @implementation ShowMyAppViewController
 
++(ShowMyAppViewController*)CreateViewController:(ShowMyApp*) sShowMyApp {
+    //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    ShowMyAppViewController *rShowMyAppViewController = [[ShowMyAppViewController alloc] initWithNibName:@"ShowMyAppViewController" bundle:[NSBundle mainBundle]];
+    [rShowMyAppViewController Install:sShowMyApp];
+    [rShowMyAppViewController setTitle:@"Share me"];
+    return rShowMyAppViewController;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     if (ShowMyAppInstance!=NULL)
@@ -23,12 +31,12 @@
 }
 
 - (void)Install:(ShowMyApp*) sShowMyAppInstance {
-    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     ShowMyAppInstance = sShowMyAppInstance;
 }
 
 -(IBAction)Share:(id)sSender {
-    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     if (ShowMyAppInstance!=NULL)
     {
         [ShowMyAppInstance Share:self Message:@"Try this App!"];
@@ -36,12 +44,12 @@
 }
 
 -(IBAction)ShareClose:(id)sSender {
-    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(IBAction)Powered:(id)sSender {
-    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     if (ShowMyAppInstance!=NULL)
     {
         [ShowMyAppInstance Powered];
