@@ -17,8 +17,8 @@ typedef void(^ShowMyAppBlockURL)(NSURL *sURL);
 @interface ShowMyApp : NSObject <ShowMyAppRequestDelegate>{
     NSString *AppName; // &n=xxxxx
     NSString *Design; // &d=xxxxx
-    NSString *Color; // &c=#XXXXXX
-    NSString *ColorBackground; // &k=#XXXXXX
+    NSString *DesignColor; // &c=#XXXXXX
+    NSString *DesignColorBackground; // &k=#XXXXXX
     
     NSString *iOS_iPhone_BundleID; // &a=xxxxx
     NSString *iOS_iPad_BundleID; // &b=xxxxx
