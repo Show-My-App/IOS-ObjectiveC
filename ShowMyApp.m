@@ -226,6 +226,8 @@ NSString *const website = @"https://www.show-my-app.com/";
     //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     NSArray *tShared = [[NSArray alloc] initWithObjects:[NSString stringWithFormat:@"%@\n%@",sMessage,[[self CreateURL] absoluteString]], nil];
     UIActivityViewController *tShareController = [[UIActivityViewController alloc] initWithActivityItems:tShared applicationActivities:NULL];
+    [tShareController setCompletionWithItemsHandler:^(UIActivityType  _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {
+    }];
     [sParentController presentViewController:tShareController animated:true completion:nil];
 }
 
