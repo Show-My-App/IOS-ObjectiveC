@@ -13,12 +13,16 @@
 #import "ShowMyAppRequestQRCode.h"
 
 @interface ShowMyApp : NSObject {
+    NSString *Message;
     NSString *AppName; // &n=xxxxx
     NSInteger Design; // &d=xxxxx
     UIColor *DesignColor; // &c=#XXXXXX
     UIColor *DesignColorBackground; // &k=#XXXXXX
     bool tiny; // &t=0/1
     bool oneIconOnly; // &i=0/1
+    
+    bool ReferencedUser;
+    NSString *ReccordID; // &r=#XXXXXX
     
     NSString *iOS_iPhone_BundleID; // &a=xxxxx
     NSString *iOS_iPad_BundleID; // &b=xxxxx
@@ -32,19 +36,6 @@
     NSString *windows_Phone_BundleID;  // &x=xxxxx
     
     NSString *steam_BundleID;  // &s=xxxxx
-    
-//    ShowMyAppRequest *downloadTinyURL;
-//    ShowMyAppRequest *downloadTinyQRCode;
-//    ShowMyAppRequest *downloadQRCode;
-//
-//    NSString *tinyURL;
-//    UIImage *QRCode;
-//    UIImage *tinyQRCode;
-//
-//    ShowMyAppBlockURL tinyURLBlock;
-//    ShowMyAppBlockQRCode tinyQRCodeBlock;
-//    ShowMyAppBlockQRCode QRCodeBlock;
-    
 }
 
 @property (nonatomic, strong) NSString *AppName;
@@ -53,6 +44,9 @@
 @property (nonatomic, strong) UIColor *DesignColorBackground;
 @property (nonatomic) bool tiny;
 @property (nonatomic) bool oneIconOnly;
+
+@property (nonatomic) bool ReferencedUser;
+@property (nonatomic, strong) NSString *ReccordID;
 
 @property (nonatomic, strong) NSString *iOS_iPhone_BundleID;
 @property (nonatomic, strong) NSString *iOS_iPad_BundleID;
@@ -83,9 +77,9 @@
 -(void)InsertFullQRCode:(UIImageView *)sImageView;
 -(void)InsertTinyQRCode:(UIImageView *)sImageView;
 
--(void)Share:(UIViewController *)sParentController Message:(NSString*) sMessage;
--(void)ShareFull:(UIViewController *)sParentController Message:(NSString*) sMessage;
--(void)ShareTiny:(UIViewController *)sParentController Message:(NSString*) sMessage;
+-(void)Share:(UIViewController *)sParentController;
+-(void)ShareFull:(UIViewController *)sParentController;
+-(void)ShareTiny:(UIViewController *)sParentController;
 
 -(void)ShareFullQRCode:(UIViewController *)sParentController;
 -(void)ShareTinyQRCode:(UIViewController *)sParentController;

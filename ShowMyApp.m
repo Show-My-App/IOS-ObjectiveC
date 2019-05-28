@@ -20,6 +20,8 @@ NSString *const website = @"https://www.show-my-app.com/";
 @synthesize DesignColorBackground;
 @synthesize tiny;
 @synthesize oneIconOnly;
+@synthesize ReferencedUser;
+@synthesize ReccordID;
 @synthesize iOS_iPhone_BundleID;
 @synthesize iOS_iPad_BundleID;
 @synthesize macOS_BundleID;
@@ -46,66 +48,76 @@ NSString *const website = @"https://www.show-my-app.com/";
 -(NSString*) GetParam {
     //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     NSMutableArray *tURL = [[NSMutableArray alloc] init];
-    if ([AppName length]!=0)
+    if (ReferencedUser == false)
     {
-        [tURL addObject:[NSString stringWithFormat:@"n=%@",AppName]];
-    }
-    [tURL addObject:[NSString stringWithFormat:@"d=%@",[@(Design) stringValue]]];
-    if (DesignColor!=nil)
-    {
-    [tURL addObject:[NSString stringWithFormat:@"c=%@",[self hexStringFromColor:DesignColor]]];
-    }
-    if (DesignColorBackground!=nil)
-    {
-    [tURL addObject:[NSString stringWithFormat:@"k=%@",[self hexStringFromColor:DesignColorBackground]]];
-    }
-    if (oneIconOnly==true)
-    {
-        [tURL addObject:@"i=1"];
-    }
-    if ([iOS_iPhone_BundleID length]!=0)
-    {
-        [tURL addObject:[NSString stringWithFormat:@"a=%@",iOS_iPhone_BundleID]];
-    }
-    if ([iOS_iPad_BundleID length]!=0)
-    {
-        if ([iOS_iPad_BundleID isEqualToString:iOS_iPhone_BundleID] == false)
+        if ([AppName length]!=0)
         {
-            [tURL addObject:[NSString stringWithFormat:@"b=%@",iOS_iPad_BundleID]];
+            [tURL addObject:[NSString stringWithFormat:@"n=%@",AppName]];
+        }
+        [tURL addObject:[NSString stringWithFormat:@"d=%@",[@(Design) stringValue]]];
+        if (DesignColor!=nil)
+        {
+            [tURL addObject:[NSString stringWithFormat:@"c=%@",[self hexStringFromColor:DesignColor]]];
+        }
+        if (DesignColorBackground!=nil)
+        {
+            [tURL addObject:[NSString stringWithFormat:@"k=%@",[self hexStringFromColor:DesignColorBackground]]];
+        }
+        if (oneIconOnly==true)
+        {
+            [tURL addObject:@"i=1"];
+        }
+        if ([iOS_iPhone_BundleID length]!=0)
+        {
+            [tURL addObject:[NSString stringWithFormat:@"a=%@",iOS_iPhone_BundleID]];
+        }
+        if ([iOS_iPad_BundleID length]!=0)
+        {
+            if ([iOS_iPad_BundleID isEqualToString:iOS_iPhone_BundleID] == false)
+            {
+                [tURL addObject:[NSString stringWithFormat:@"b=%@",iOS_iPad_BundleID]];
+            }
+        }
+        if ([macOS_BundleID length]!=0)
+        {
+            [tURL addObject:[NSString stringWithFormat:@"m=%@",macOS_BundleID]];
+        }
+        if ([tvOS_BundleID length]!=0)
+        {
+            [tURL addObject:[NSString stringWithFormat:@"v=%@",tvOS_BundleID]];
+        }
+        if ([android_BundleID length]!=0)
+        {
+            [tURL addObject:[NSString stringWithFormat:@"g=%@",android_BundleID]];
+        }
+        if ([android_Tablet_BundleID length]!=0)
+        {
+            if ([android_Tablet_BundleID isEqualToString:android_BundleID] == false)
+            {
+                [tURL addObject:[NSString stringWithFormat:@"h=%@",android_Tablet_BundleID]];
+            }
+        }
+        if ([windows_BundleID length]!=0)
+        {
+            [tURL addObject:[NSString stringWithFormat:@"w=%@",windows_BundleID]];
+        }
+        if ([windows_Phone_BundleID length]!=0)
+        {
+            [tURL addObject:[NSString stringWithFormat:@"x=%@",windows_Phone_BundleID]];
+        }
+        if ([steam_BundleID length]!=0)
+        {
+            [tURL addObject:[NSString stringWithFormat:@"s=%@",steam_BundleID]];
         }
     }
-    if ([macOS_BundleID length]!=0)
+    else
     {
-        [tURL addObject:[NSString stringWithFormat:@"m=%@",macOS_BundleID]];
-    }
-    if ([tvOS_BundleID length]!=0)
-    {
-        [tURL addObject:[NSString stringWithFormat:@"v=%@",tvOS_BundleID]];
-    }
-    if ([android_BundleID length]!=0)
-    {
-        [tURL addObject:[NSString stringWithFormat:@"g=%@",android_BundleID]];
-    }
-    if ([android_Tablet_BundleID length]!=0)
-    {
-        if ([android_Tablet_BundleID isEqualToString:android_BundleID] == false)
+        if ([ReccordID length]!=0)
         {
-            [tURL addObject:[NSString stringWithFormat:@"h=%@",android_Tablet_BundleID]];
+            [tURL addObject:[NSString stringWithFormat:@"s=%@",ReccordID]];
         }
     }
-    if ([windows_BundleID length]!=0)
-    {
-        [tURL addObject:[NSString stringWithFormat:@"w=%@",windows_BundleID]];
-    }
-    if ([windows_Phone_BundleID length]!=0)
-    {
-        [tURL addObject:[NSString stringWithFormat:@"x=%@",windows_Phone_BundleID]];
-    }
-    if ([steam_BundleID length]!=0)
-    {
-        [tURL addObject:[NSString stringWithFormat:@"s=%@",steam_BundleID]];
-    }
-   return [tURL componentsJoinedByString:@"&"];
+    return [tURL componentsJoinedByString:@"&"];
 }
 
 -(NSURL*)CreateURL {
@@ -133,7 +145,7 @@ NSString *const website = @"https://www.show-my-app.com/";
     //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     NSURL *tURL = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@%@%@", website, @"url.php?t=1&", [self GetParam]]];
     [ShowMyAppRequestURL createDownloadForURL:tURL withBlock:sBlock];
-    }
+}
 
 -(void)GetQRCode:(ShowMyAppBlockQRCode) sBlock {
     //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
@@ -210,31 +222,31 @@ NSString *const website = @"https://www.show-my-app.com/";
     }];
 }
 
--(void)Share:(UIViewController *)sParentController Message:(NSString*) sMessage {
+-(void)Share:(UIViewController *)sParentController {
     //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     if (tiny == true)
     {
-        [self ShareTiny:sParentController Message: sMessage];
+        [self ShareTiny:sParentController];
     }
     else
     {
-        [self ShareFull:sParentController Message: sMessage];
+        [self ShareFull:sParentController];
     }
 }
 
--(void)ShareFull:(UIViewController *)sParentController Message:(NSString*) sMessage {
+-(void)ShareFull:(UIViewController *)sParentController {
     //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
-    NSArray *tShared = [[NSArray alloc] initWithObjects:[NSString stringWithFormat:@"%@\n%@",sMessage,[[self CreateURL] absoluteString]], nil];
+    NSArray *tShared = [[NSArray alloc] initWithObjects:[NSString stringWithFormat:@"%@\n%@",Message,[[self CreateURL] absoluteString]], nil];
     UIActivityViewController *tShareController = [[UIActivityViewController alloc] initWithActivityItems:tShared applicationActivities:NULL];
     [tShareController setCompletionWithItemsHandler:^(UIActivityType  _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {
     }];
     [sParentController presentViewController:tShareController animated:true completion:nil];
 }
 
--(void)ShareTiny:(UIViewController *)sParentController Message:(NSString*) sMessage {
+-(void)ShareTiny:(UIViewController *)sParentController {
     //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     [self GetTinyURL: ^(NSURL *sURL){
-        NSArray *tShared = [[NSArray alloc] initWithObjects:[NSString stringWithFormat:@"%@\n%@",sMessage,[sURL absoluteString]], nil];
+        NSArray *tShared = [[NSArray alloc] initWithObjects:[NSString stringWithFormat:@"%@\n%@",self->Message,[sURL absoluteString]], nil];
         UIActivityViewController *tShareController = [[UIActivityViewController alloc] initWithActivityItems:tShared applicationActivities:NULL];
         [sParentController presentViewController:tShareController animated:true completion:nil];
     }];
@@ -250,13 +262,13 @@ NSString *const website = @"https://www.show-my-app.com/";
 }
 
 -(void)ShareTinyQRCode:(UIViewController *)sParentController {
-        //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     [self GetTinyQRCode: ^(UIImage *sQRCode){
         NSArray *tShared = [[NSArray alloc] initWithObjects:sQRCode, nil];
         UIActivityViewController *tShareController = [[UIActivityViewController alloc] initWithActivityItems:tShared applicationActivities:NULL];
         [sParentController presentViewController:tShareController animated:true completion:nil];
     }];
-    }
+}
 
 -(void)ShareInWebBrowser {
     //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
@@ -267,4 +279,4 @@ NSString *const website = @"https://www.show-my-app.com/";
     //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     [[UIApplication sharedApplication] openURL:[[NSURL alloc] initWithString:website]];
 }
- @end
+@end

@@ -30,7 +30,7 @@
     //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     if (ShowMyAppInstance!=NULL)
     {
-        [ShowMyAppInstance Share:self Message:@"Try this App!"];
+        [ShowMyAppInstance Share:self];
     }
 }
 
@@ -38,7 +38,7 @@
     //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     if (ShowMyAppInstance!=NULL)
     {
-        [ShowMyAppInstance ShareTiny:self Message:@"Try this App!"];
+        [ShowMyAppInstance ShareTiny:self];
     }
 }
 
