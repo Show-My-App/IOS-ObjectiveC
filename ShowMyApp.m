@@ -45,6 +45,15 @@ NSString *const website = @"https://www.show-my-app.com/";
             lroundf(b * 255)];
 }
 
+-(id)init{
+    self = [super init];
+    if (self)
+    {
+        DesignColor = UIColor.greenColor;
+        DesignColorBackground = UIColor.redColor;
+    }
+    return self;
+}
 -(NSString*) GetParam {
     //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     NSMutableArray *tURL = [[NSMutableArray alloc] init];
@@ -211,14 +220,16 @@ NSString *const website = @"https://www.show-my-app.com/";
 -(void)InsertFullQRCode:(UIImageView *)sImageView {
     //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     [self GetFullQRCode: ^(UIImage *sQRCode){
-        [sImageView setImage:sQRCode];
+        [sImageView setImage:[sQRCode imageWithRenderingMode:UIImageRenderingModeAutomatic]];
+//        [sImageView setImage:sQRCode];
     }];
 }
 
 -(void)InsertTinyQRCode:(UIImageView *)sImageView {
     //NSLog(@" %s line %d",__FUNCTION__, __LINE__);
     [self GetTinyQRCode: ^(UIImage *sQRCode){
-        [sImageView setImage:sQRCode];
+        [sImageView setImage:[sQRCode imageWithRenderingMode:UIImageRenderingModeAutomatic]];
+//        [sImageView setImage:sQRCode];
     }];
 }
 

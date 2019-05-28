@@ -14,6 +14,14 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ShowMyAppViewController : UIViewController {
     ShowMyApp *ShowMyAppInstance;
     IBOutlet UIImageView *imageQRCode;
+    IBOutlet UIImageView *imageQRCodeOverlay;
+    IBOutlet UIImageView *imageIcon;
+    IBOutlet UILabel *QRCodeTitleLabel;
+    IBOutlet UILabel *LinkTitleLabel;
+    IBOutlet UIButton *PoweredButton;
+    IBOutlet UIButton *ShareLinkButton;
+    IBOutlet UIView *QRCodeArea;
+    IBOutlet UIButton *CloseButton;
 }
 +(ShowMyAppViewController*)CreateViewController:(ShowMyApp*) sShowMyApp;
 -(void)Install:(ShowMyApp*) sShowMyAppInstance;
