@@ -53,24 +53,67 @@
         [PoweredButton setTitleColor:[ShowMyAppInstance DesignColorBackground] forState:UIControlStateNormal];
         PoweredButton.backgroundColor = [ShowMyAppInstance DesignColor];
         
-        
         [CloseButton setTitleColor:[ShowMyAppInstance DesignColor] forState:UIControlStateNormal];
         CloseButton.backgroundColor = [ShowMyAppInstance DesignColorBackground];
       
         [ShowMyAppInstance InsertQRCode:imageQRCode];
         
+        
+        
+//        [QRCodeArea setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [QRCodeArea setTransform:CGAffineTransformMakeRotation(M_PI_4)];
+        
+        
+//        // Setup the animation
+//        [UIView beginAnimations:nil context:NULL];
+//        [UIView setAnimationDuration:60];
+//        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+//        [UIView setAnimationBeginsFromCurrentState:YES];
+//
+//        // The transform matrix
+//        CGAffineTransform transform = CGAffineTransformMakeRotation(2*M_PI);
+//        QRCodeArea.transform = transform;
+//
+//        // Commit the changes
+//        [UIView commitAnimations];
+        
 //        [QRCodeArea setAutoresizesSubviews:NO];
-//        [QRCodeArea setAutoresizingMask:UIViewAutoresizingNone];
+//        QRCodeArea.alpha = 1.0;
+//        [UIView animateWithDuration:20
+//                         animations:^{QRCodeArea.alpha = 0.0;}
+//                         completion:^(BOOL finished){ [QRCodeArea removeFromSuperview]; }];
+//        [self rotateImageView];
+        
+//        [imageQRCode setAutoresizingMask:UIViewAutoresizingNone];
 //        [QRCodeArea setTransform:CGAffineTransformMakeRotation(M_PI / 2)];
 //        imageQRCode.transform = CGAffineTransformRotate(imageQRCode.transform , -M_PI/2.0);
-//        [self runSpinAnimationOnView:QRCodeArea duration:60 rotations:359 repeat:true];
+//        [self runSpinAnimationOnView:QRCodeArea duration:60 repeat:true];
     }
 }
 
-- (void) runSpinAnimationOnView:(UIView*)view duration:(CGFloat)duration rotations:(CGFloat)rotations repeat:(float)repeat {
+- (void)rotateImageView
+{
+    NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+    [UIView animateWithDuration:60 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+        NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+//        [self->QRCodeArea setTransform:CGAffineTransformRotate(self->QRCodeArea.transform, M_PI_2)];
+//        [self->QRCodeArea setTransform:CGAffineTransformRotate(CGAffineTransformIdentity, M_PI_2)];
+//        [[self->QRCodeArea superview] layoutIfNeeded];
+//        [[self view] layoutIfNeeded];
+        [self->QRCodeArea setTransform:CGAffineTransformTranslate(self->QRCodeArea.transform,320,320)];
+    }completion:^(BOOL finished){
+        if (finished) {
+            NSLog(@" %s line %d",__FUNCTION__, __LINE__);
+            [self rotateImageView];
+        }
+    }];
+}
+
+- (void) runSpinAnimationOnView:(UIView*)view duration:(CGFloat)duration repeat:(float)repeat {
     CABasicAnimation* rotationAnimation;
     rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-    rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0 /* full rotation*/ * rotations * duration ];
+    rotationAnimation.fromValue = [NSNumber numberWithInt:0];
+    rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0];
     rotationAnimation.duration = duration;
     rotationAnimation.cumulative = YES;
     rotationAnimation.repeatCount = repeat ? HUGE_VALF : 0;
