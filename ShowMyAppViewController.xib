@@ -37,13 +37,14 @@
                         </imageView>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ShowMyAppFakeQRCode" translatesAutoresizingMaskIntoConstraints="NO" id="6v2-oN-lYb">
                             <rect key="frame" x="90" y="90" width="140" height="140"/>
+                            <color key="tintColor" red="0.75220612050000002" green="0.35926394270000001" blue="0.31553293929999998" alpha="0.76177376760000004" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="140" id="OR7-15-uaA"/>
                                 <constraint firstAttribute="width" constant="140" id="xGa-GS-LQc"/>
                             </constraints>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" red="0.44820676813471505" green="0.2787926461232027" blue="0.15606129554805057" alpha="0.81142715669014087" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="2Y7-gu-ZMr" secondAttribute="bottom" constant="-40" id="5Wv-SV-F8a"/>
                         <constraint firstAttribute="width" constant="320" id="ADV-Nq-c1a"/>
@@ -149,7 +150,7 @@
         </view>
     </objects>
     <resources>
-        <image name="ShowMyAppFakeQRCode" width="110" height="110"/>
+        <image name="ShowMyAppFakeQRCode" width="55.5" height="55.5"/>
         <image name="ShowMyAppQRCodeArea" width="1024" height="1024"/>
         <image name="ShowMyAppShareButton " width="256" height="256"/>
         <image name="ShowMyAppWhiteIcon" width="1024" height="1024"/>
